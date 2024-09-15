@@ -1,15 +1,11 @@
+import 'config/env.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-/* import 'package:flutter_dotenv/flutter_dotenv.dart'; */
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  /* await dotenv.load(fileName: ".env"); */
-  final SUPABASE_URL = const String.fromEnvironment('SUPABASE_URL');
-  final SUPABASE_ANON_KEY = const String.fromEnvironment('SUPABASE_ANON_KEY');
-
-  await Supabase.initialize(url: SUPABASE_URL, anonKey: SUPABASE_ANON_KEY);
+  await Supabase.initialize(url: Env.supabaseUrl, anonKey: Env.supabaseAnonKey);
   runApp(const MyApp());
 }
 
@@ -33,7 +29,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _future = Supabase.instance.client.from('aaaa').select();
+  Future<dynamic>? _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = Supabase.instance.client.from('person').select();
+  }
 
   @override
   Widget build(BuildContext context) {
