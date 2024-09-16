@@ -1,10 +1,12 @@
 import 'config/env.dart';
+import 'screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Supabaase initialization
   await Supabase.initialize(url: Env.supabaseUrl, anonKey: Env.supabaseAnonKey);
   runApp(const MyApp());
 }
@@ -14,13 +16,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Todos',
-      home: HomePage(),
+      home: SignUpScreen(),
     );
   }
 }
-
+/* 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -74,3 +76,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+ */
